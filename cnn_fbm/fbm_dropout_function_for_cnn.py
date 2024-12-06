@@ -4,12 +4,7 @@ import torch.nn as nn
 from torch import Tensor
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
-"""
-Most of the code is directly adapted from the code written
-by Christian Lee, but Klaus has made some modifications to
-apply it on CNN. Original python file of the same name will 
-not work with v1_fbmcnn.py
-"""
+
 class DropoutFBM(nn.Module):
 
     def __init__(self, hurst: float, n_agents: int, n_samples: int, max_iters: int, t_scale: float, 
