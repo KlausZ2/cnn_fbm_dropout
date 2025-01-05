@@ -7,9 +7,10 @@ import matplotlib.pyplot as plt
 from fbm_dropout_function_for_cnn import DropoutFBM
 """
 How to run this CNN:
-1. Make sure you have cnn_with_fbm_dropout.py, fbm_dropout_for_cnn.py, "test" folder, and "train" folder
-2. Change the path from on line 20 and 21 from 'C:/Users/Klaus Zhang/torch/cnn_fbm/train' to your own path
-3. Type "python cnn_with_fbm_dropout.py" to run the CNN
+1. Make sure you have set up a proper environment for PyTorch pn your computer.
+2. Make sure you have cnn_with_fbm_dropout.py, fbm_dropout_for_cnn.py, "test" folder, and "train" folder.
+3. Change the path from on line 21 and 22 from 'C:/Users/Klaus Zhang/torch/cnn_fbm/train' to your own path.
+4. Type "python cnn_with_fbm_dropout.py" to run the CNN.
 """
 transform = transforms.Compose([
     transforms.Resize((128, 128)),
