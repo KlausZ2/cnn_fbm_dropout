@@ -5,14 +5,18 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
 from fbm_dropout_function_for_cnn import DropoutFBM
-
+"""
+How to run this CNN:
+1. Make sure you have cnn_with_fbm_dropout.py, fbm_dropout_for_cnn.py, "test" folder, and "train" folder
+2. Change the path from on line 20 and 21 from 'C:/Users/Klaus Zhang/torch/cnn_fbm/train' to your own path
+3. Type "python cnn_with_fbm_dropout.py" to run the CNN
+"""
 transform = transforms.Compose([
     transforms.Resize((128, 128)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
 ])
 
-# Remember to change the path to training and testing data to your own device
 train_data = datasets.ImageFolder(root='C:/Users/Klaus Zhang/torch/cnn_fbm/train', transform=transform)
 test_data = datasets.ImageFolder(root='C:/Users/Klaus Zhang/torch/cnn_fbm/test', transform=transform)
 
@@ -25,7 +29,8 @@ class CNN(nn.Module):
         self.conv_layers = nn.Sequential(
             nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
-            # nn.Dropout(0.3),
+            # Apply DropoutFBM to the first convolutional layer
+            #DropoutFBM(0.9, n_agents[0], n_samples, max_iters, t_scale, grid_sizes, is_conv=True, device=device, dtype=dtype),
             nn.MaxPool2d(kernel_size=2, stride=2),
 
             nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1),
@@ -35,15 +40,13 @@ class CNN(nn.Module):
 
             nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1),
             nn.ReLU(),
-            #nn.Dropout(0.9),
-            #DropoutFBM(0.9, n_agents[0], n_samples, max_iters, t_scale, grid_sizes, is_conv=True, device=device, dtype=dtype),
+            # nn.Dropout(0.9),
             nn.MaxPool2d(kernel_size=2, stride=2),
         )
         self.fc_layers = nn.Sequential(
             nn.Flatten(),
             nn.Linear(128 * 16 * 16, 256),
             nn.ReLU(),
-            # nn.Dropout(0.5),
             nn.Linear(256, 2)
         )
     def forward(self, x):
